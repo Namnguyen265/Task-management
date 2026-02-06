@@ -1,6 +1,6 @@
 package com.taskmanagement.taskmanager.controller;
 
-import com.taskmanagement.taskmanager.dto.UserResponse;
+import com.taskmanagement.taskmanager.dto.response.UserResponse;
 import com.taskmanagement.taskmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

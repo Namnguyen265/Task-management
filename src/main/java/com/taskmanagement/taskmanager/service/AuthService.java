@@ -1,24 +1,21 @@
 package com.taskmanagement.taskmanager.service;
 
 
-import com.taskmanagement.taskmanager.dto.AuthResponse;
-import com.taskmanagement.taskmanager.dto.LoginRequest;
-import com.taskmanagement.taskmanager.dto.RegisterRequest;
+import com.taskmanagement.taskmanager.dto.response.AuthResponse;
+import com.taskmanagement.taskmanager.dto.request.LoginRequest;
+import com.taskmanagement.taskmanager.dto.request.RegisterRequest;
 import com.taskmanagement.taskmanager.enums.Role;
 import com.taskmanagement.taskmanager.enums.Status;
 import com.taskmanagement.taskmanager.entity.User;
 import com.taskmanagement.taskmanager.repository.UserRepository;
 import com.taskmanagement.taskmanager.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.support.BeanDefinitionDsl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +33,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.EMPLOYEE);
         user.setStatus(Status.ACTIVE);
-//        user.setStartDate(LocalDate.now());
+//      user.setStartDate(LocalDate.now());
         userRepository.save(user);
 
         String token = jwtService.generateToken(user);

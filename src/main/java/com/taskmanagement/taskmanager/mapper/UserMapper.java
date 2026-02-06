@@ -1,6 +1,6 @@
 package com.taskmanagement.taskmanager.mapper;
 
-import com.taskmanagement.taskmanager.dto.UserResponse;
+import com.taskmanagement.taskmanager.dto.response.UserResponse;
 import com.taskmanagement.taskmanager.entity.User;
 
 public class UserMapper {

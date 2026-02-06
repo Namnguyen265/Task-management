@@ -1,7 +1,7 @@
 package com.taskmanagement.taskmanager.mapper;
 
-import com.taskmanagement.taskmanager.dto.ProjectMemberResponse;
-import com.taskmanagement.taskmanager.dto.ProjectResponse;
+import com.taskmanagement.taskmanager.dto.response.ProjectMemberResponse;
+import com.taskmanagement.taskmanager.dto.response.ProjectResponse;
 import com.taskmanagement.taskmanager.entity.Project;
 import com.taskmanagement.taskmanager.entity.ProjectMember;
 import com.taskmanagement.taskmanager.entity.User;

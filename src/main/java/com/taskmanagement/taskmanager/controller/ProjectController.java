@@ -1,7 +1,7 @@
 package com.taskmanagement.taskmanager.controller;
 
-import com.taskmanagement.taskmanager.dto.CreateProjectRequest;
-import com.taskmanagement.taskmanager.dto.ProjectResponse;
+import com.taskmanagement.taskmanager.dto.request.CreateProjectRequest;
+import com.taskmanagement.taskmanager.dto.response.ProjectResponse;
 import com.taskmanagement.taskmanager.dto.request.UpdateProjectMemberRoleRequest;
 import com.taskmanagement.taskmanager.dto.request.UpdateProjectRequest;
 import com.taskmanagement.taskmanager.entity.Project;

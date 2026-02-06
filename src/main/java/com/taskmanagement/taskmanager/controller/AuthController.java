@@ -1,16 +1,14 @@
 package com.taskmanagement.taskmanager.controller;
 
-import com.taskmanagement.taskmanager.dto.AuthResponse;
-import com.taskmanagement.taskmanager.dto.LoginRequest;
-import com.taskmanagement.taskmanager.dto.RegisterRequest;
+import com.taskmanagement.taskmanager.dto.response.AuthResponse;
+import com.taskmanagement.taskmanager.dto.request.LoginRequest;
+import com.taskmanagement.taskmanager.dto.request.RegisterRequest;
 import com.taskmanagement.taskmanager.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -26,5 +24,10 @@ public class AuthController {
     @PostMapping("/login")
     public AuthResponse login(@RequestBody LoginRequest request) {
         return authService.login(request);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(){
+        return ResponseEntity.ok("Logout successfully");
     }
 }

@@ -16,94 +16,16 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-//    @Value("${app.jwt.secret}")
-//    private String jwtSecret;
-//
-//    @Value("${app.jwt.expiration}") // milliseconds
-//    private long jwtExpirationMs;
-//
-//    private Key getSigningKey() {
-//        return Keys.hmacShaKeyFor(jwtSecret.getBytes());
-//    }
-//
-//    // ===============================
-//    // Generate token
-//    // ===============================
-//    public String generateToken(String username) {
-//        return Jwts.builder()
-//                .setSubject(username)
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
-//                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
-//                .compact();
-//    }
-//
-//    // ===============================
-//    // Extract Username
-//    // ===============================
-//    public String extractUsername(String token) {
-//        return getClaims(token).getSubject();
-//    }
-//
-//    // ===============================
-//    // Validate token
-//    // ===============================
-//    public boolean validateToken(String token) {
-//        try {
-//            getClaims(token);
-//            return true;
-//        } catch (ExpiredJwtException e) {
-//            System.out.println("JWT expired: " + e.getMessage());
-//        } catch (UnsupportedJwtException e) {
-//            System.out.println("JWT unsupported: " + e.getMessage());
-//        } catch (MalformedJwtException e) {
-//            System.out.println("Malformed JWT: " + e.getMessage());
-//        } catch (SecurityException e) {
-//            System.out.println("Invalid signature: " + e.getMessage());
-//        } catch (IllegalArgumentException e) {
-//            System.out.println("JWT claims string empty: " + e.getMessage());
-//        }
-//        return false;
-//    }
-//
-//    // ===============================
-//    // Parse claims
-//    // ===============================
-//    private Claims getClaims(String token) {
-//        return Jwts.parserBuilder()
-//                .setSigningKey(getSigningKey())
-//                .build()
-//                .parseClaimsJws(token)
-//                .getBody();
-//    }
-//
-//    public boolean isTokenValid(String token, UserDetails userDetails) {
-//        final String username = extractUsername(token);
-//        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-//    }
-//
-//    private boolean isTokenExpired(String token) {
-//        return extractExpiration(token).before(new Date());
-//    }
-//
-//    private Date extractExpiration(String token) {
-//        return extractClaim(token, Claims::getExpiration);
-//    }
-//
-//    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-//        final Claims claims = extractAllClaims(token);
-//        return claimsResolver.apply(claims);
-//    }
 
     private final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250655368566D5970";
 
-    // 🔑 Lấy key ký JWT
+    // Lấy key ký JWT
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // 📌 Tạo token
+     //Tạo token
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
@@ -142,18 +64,18 @@ public class JwtService {
                 .compact();
     }
 
-    // 📌 Extract username từ token
+    // Extract username từ token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // 📌 Kiểm tra token hợp lệ
+    // Kiểm tra token hợp lệ
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
-    // 📌 Kiểm tra token hết hạn
+    // Kiểm tra token hết hạn
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
@@ -162,13 +84,12 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    // 📌 Lấy 1 claim bất kỳ
+    // Lấy 1 claim bất kỳ
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    // 📌 ⭐ Quan trọng – phương thức này bạn đang thiếu
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()

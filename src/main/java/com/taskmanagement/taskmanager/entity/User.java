@@ -41,10 +41,3 @@ public class User {
 
 }
 
-// protected enum Role {
-//    ADMIN, EMPLOYEE
-//}
-//
-// protected enum Status {
-//    ACTIVE, INACTIVE
-//}

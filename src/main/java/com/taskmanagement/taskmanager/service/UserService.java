@@ -1,6 +1,6 @@
 package com.taskmanagement.taskmanager.service;
 
-import com.taskmanagement.taskmanager.dto.UserResponse;
+import com.taskmanagement.taskmanager.dto.response.UserResponse;
 import com.taskmanagement.taskmanager.entity.User;
 import com.taskmanagement.taskmanager.enums.Status;
 import com.taskmanagement.taskmanager.repository.UserRepository;

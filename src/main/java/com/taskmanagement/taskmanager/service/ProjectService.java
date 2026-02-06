@@ -1,7 +1,7 @@
 package com.taskmanagement.taskmanager.service;
 
-import com.taskmanagement.taskmanager.dto.CreateProjectRequest;
-import com.taskmanagement.taskmanager.dto.ProjectResponse;
+import com.taskmanagement.taskmanager.dto.request.CreateProjectRequest;
+import com.taskmanagement.taskmanager.dto.response.ProjectResponse;
 import com.taskmanagement.taskmanager.dto.request.UpdateProjectRequest;
 import com.taskmanagement.taskmanager.entity.Project;
 import com.taskmanagement.taskmanager.entity.ProjectMember;
@@ -56,33 +56,6 @@ public class ProjectService {
         return project;
     }
 
-//    public void addMember(Long projectId, Long userId) {
-//
-//        User currentUser = authService.getCurrentUser();
-//
-//        Project project = projectRepository.findById(projectId)
-//                .orElseThrow(() -> new RuntimeException("Project not found"));
-//
-//        ProjectMember myRole = projectMemberRepository
-//                .findByProjectIdAndUserId(projectId, currentUser.getId())
-//                .orElseThrow(() -> new RuntimeException("Not project member"));
-//
-//        if (myRole.getRoleInProject() == RoleInProject.MEMBER &&
-//                currentUser.getRole() != Role.ADMIN) {
-//            throw new RuntimeException("Permission denied");
-//        }
-//
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        ProjectMember member = new ProjectMember();
-//        member.setProject(project);
-//        member.setUser(user);
-//        member.setRoleInProject(RoleInProject.MEMBER);
-//
-//        projectMemberRepository.save(member);
-//    }
-
     public void addMember(Long projectId, Long userId) {
 
         User currentUser = authService.getCurrentUser();
@@ -120,46 +93,6 @@ public class ProjectService {
         projectMemberRepository.save(member);
     }
 
-//    public void addMembers(Long projectId, AddMembersRequest request) {
-//
-//        User currentUser = authService.getCurrentUser();
-//
-//        Project project = projectRepository.findById(projectId)
-//                .orElseThrow(() -> new RuntimeException("Project not found"));
-//
-//        // Lấy role của người đang thao tác trong project
-//        ProjectMember myRole = projectMemberRepository
-//                .findByProjectIdAndUserId(projectId, currentUser.getId())
-//                .orElseThrow(() -> new RuntimeException("Not a project member"));
-//
-//        // Chỉ ADMIN hoặc LEADER mới được add member
-//        if (myRole.getRoleInProject() == RoleInProject.MEMBER
-//                && currentUser.getRole() != Role.ADMIN) {
-//            throw new RuntimeException("Permission denied");
-//        }
-//
-//        for (Long userId : request.getUserIds()) {
-//
-//            // Không add trùng
-//            boolean exists = projectMemberRepository
-//                    .existsByProjectIdAndUserId(projectId, userId);
-//
-//            if (exists) continue;
-//
-//            User user = userRepository.findById(userId)
-//                    .orElseThrow(() -> new RuntimeException("User not found: " + userId));
-//
-//            ProjectMember member = new ProjectMember();
-//            member.setProject(project);
-//            member.setUser(user);
-//            member.setRoleInProject(RoleInProject.MEMBER);
-//
-//            projectMemberRepository.save(member);
-//        }
-//    }
-
-
-
     public void assignLeader(Long projectId, Long userId){
         User admin = authService.getCurrentUser();
 
@@ -193,7 +126,7 @@ public class ProjectService {
                 .findByProjectIdAndUserId(projectId, userId)
                 .orElseThrow(() -> new RuntimeException("User not in project"));
 
-        // ❌ Không cho xóa chính mình
+        // Không cho xóa chính mình
         if (currentUser.getId().equals(userId)) {
             throw new RuntimeException("Cannot remove yourself");
         }
@@ -215,7 +148,7 @@ public class ProjectService {
             return;
         }
 
-        // MEMBER → ❌
+        // MEMBER → denied
         throw new RuntimeException("Permission denied ssss");
     }
 

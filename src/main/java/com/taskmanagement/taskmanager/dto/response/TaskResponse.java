@@ -8,11 +8,6 @@ import java.util.Date;
 
 @Data
 public class TaskResponse {
-//    private Long id;
-//    private String title;
-//    private String status;
-//    private String priority;
-//    private String assignedTo;
 
     private Long id;
     private String title;
