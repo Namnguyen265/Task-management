@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "task_attachments")
 @Getter
@@ -22,9 +24,19 @@ public class TaskAttachment {
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
 
-    private String fileUrl;
+    // tên file gốc (hiển thị cho user)
+    private String originalFilename;
+
+    // tên file lưu trong server
+    private String storedFilename;
+
     private String fileType;
+    private Long fileSize;
+
+    @ManyToOne
+    @JoinColumn(name = "uploaded_by")
+    private User uploadedBy;
 
     @Column(updatable = false)
-    private java.sql.Timestamp createdAt;
+    private Timestamp createdAt;
 }
