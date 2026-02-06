@@ -1,4 +1,4 @@
-package com.taskmanagement.taskmanager.dto;
+package com.taskmanagement.taskmanager.dto.request;
 
 import lombok.Data;
 

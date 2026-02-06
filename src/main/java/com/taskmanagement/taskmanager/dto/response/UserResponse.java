@@ -1,4 +1,4 @@
-package com.taskmanagement.taskmanager.dto;
+package com.taskmanagement.taskmanager.dto.response;
 
 import com.taskmanagement.taskmanager.enums.Role;
 import com.taskmanagement.taskmanager.enums.Status;
